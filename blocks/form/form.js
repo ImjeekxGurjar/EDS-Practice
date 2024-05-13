@@ -1,6 +1,6 @@
 import createField from './form-fields.js';
 import { sampleRUM } from '../../scripts/aem.js';
-
+import { autolinkModals } from '../../scripts/scripts.js';
 async function createForm(formHref) {
   const { pathname } = new URL(formHref);
   const resp = await fetch(pathname);
@@ -53,7 +53,9 @@ function handleSubmitError(form, error) {
 }
 
 async function handleSubmit(form) {
-  if (form.getAttribute('data-submitting') === 'true') return;
+  if (form.getAttribute('data-submitting') === 'true'){
+    autolinkModals(doc);
+  };
 
   const submit = form.querySelector('button[type="submit"]');
   try {

@@ -24,7 +24,7 @@ export default async function decorate(block) {
     const section = footer.children[i];
     if (section) section.classList.add(`footer-${c}`);
   });
-  
+
   const footerSections = footer.querySelector('.footer-footer-1'); // Adjust the selector as needed
   console.log(footerSections);
   if (footerSections) {
@@ -32,7 +32,7 @@ export default async function decorate(block) {
       footerSection.setAttribute('aria-expanded', 'false');
       footerSection.setAttribute('role', 'button');
       footerSection.setAttribute('tabindex', '0');
-  
+
       if (footerSection.querySelector('ul')) footerSection.classList.add('footer-li');
       footerSection.addEventListener('click', () => {
         if (isDesktop.matches) {
