@@ -12,6 +12,13 @@ main .hero-container {
   min-height: 300px;
 }
 
+.pp-home-banner div >div{
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+  color:white;
+}
+
 .hero h1 {
   max-width: 1200px;
   margin-left: auto;
@@ -32,3 +39,11 @@ main .hero-container {
   width: 100%;
   height: 100%;
 }
+
+.making-carousel .hero-wrapper .hero{
+  min-height: 500px!important;
+  }
+
+.making-carousel{
+  display: block!important;
+  }

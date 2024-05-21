@@ -1,0 +1,9 @@
+$(document).ready(function(){
+    $('.making-carousel').slick({
+        dots:true,
+        infinity:true,
+        speed:3000,
+        slidesToShow:1,
+        adaptiveHeight:true
+    });
+})
