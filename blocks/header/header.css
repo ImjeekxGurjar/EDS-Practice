@@ -282,3 +282,16 @@ header nav .nav-tools .default-content-wrapper p{
 header nav .nav-tools .default-content-wrapper{
   display:flex;
 }
+
+header nav .nav-tools input[type=text]{
+  box-sizing: border-box;
+  border: none;
+  font-size: 16px;
+  background-color: white;
+  background-image: url('/icons/search.svg');
+  background-position: 10px 10px; 
+  background-repeat: no-repeat;
+  padding: 12px 20px 12px 40px;
+}
+
+

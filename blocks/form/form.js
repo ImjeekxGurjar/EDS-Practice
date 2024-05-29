@@ -105,4 +105,104 @@ export default async function decorate(block) {
       }
     }
   });
+
+   
 }
+function doGet(e) {
+  const sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
+  const rows = sheet.getDataRange().getValues();
+  
+  const result = {
+    data: []
+  };
+
+  const headers = rows[0];
+  const categories = {};
+
+  for (let i = 1; i < rows.length; i++) {
+    const row = rows[i];
+    const category = row[0];
+    const documentType = row[1];
+    const title = row[2];
+    const description = row[3];
+    const documents = row[4].split(", ");
+
+    if (!categories[category]) {
+      categories[category] = [];
+    }
+
+    categories[category].push({
+      documentType: documentType,
+      title: title,
+      description: description,
+      documents: documents
+    });
+  }
+
+  for (const category in categories) {
+    result.data.push({
+      category: category,
+      documentCateory: categories[category]
+    });
+  }
+
+  const jsonOutput = JSON.stringify(result);
+  return ContentService.createTextOutput(jsonOutput).setMimeType(ContentService.MimeType.JSON);
+}
+
+
+document.addEventListener('DOMContentLoaded', () => {
+  const jsonUrl = 'https://main--eds-practice--imjeekxgurjar.hlx.page/jsondata.json';
+  console.log(jsonUrl);
+
+  fetch(jsonUrl)
+    .then(response => response.json())
+    .then(data => {
+      const dropdown = document.getElementById('categoryDropdown');
+      const tabsContainer = document.getElementById('tabs-container');
+      const contentContainer = document.getElementById('content-container');
+
+      // Populate dropdown
+      data.data.forEach((item, index) => {
+        const option = document.createElement('option');
+        option.value = index;
+        option.innerText = item.category;
+        dropdown.appendChild(option);
+      });
+
+      // Update tabs and content based on selected category
+      const updateTabsAndContent = () => {
+        const selectedIndex = dropdown.value;
+        const selectedCategory = data.data[selectedIndex];
+        tabsContainer.innerHTML = '';
+        contentContainer.innerHTML = '';
+
+        selectedCategory.documentCateory.forEach((doc, index) => {
+          const tabDiv = document.createElement('div');
+          tabDiv.className = `tab${index === 0 ? ' active' : ''}`;
+          tabDiv.dataset.tab = index;
+          tabDiv.innerText = doc.documentType;
+          tabsContainer.appendChild(tabDiv);
+
+          const contentDiv = document.createElement('div');
+          contentDiv.className = 'content';
+          contentDiv.style.display = index === 0 ? 'block' : 'none';
+          contentDiv.innerHTML = `<h3>${doc.title}</h3><p>${doc.description}</p><ul>${doc.documents.map(d => `<li>${d}</li>`).join('')}</ul>`;
+          contentContainer.appendChild(contentDiv);
+
+          tabDiv.addEventListener('click', function() {
+            document.querySelectorAll('.tab').forEach(tab => tab.classList.remove('active'));
+            this.classList.add('active');
+            document.querySelectorAll('.content').forEach((content, contentIndex) => {
+              content.style.display = contentIndex == index ? 'block' : 'none';
+            });
+          });
+        });
+      };
+
+      dropdown.addEventListener('change', updateTabsAndContent);
+      updateTabsAndContent();
+    })
+    .catch(error => console.error('Error fetching data:', error));
+});
+

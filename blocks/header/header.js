@@ -1,6 +1,6 @@
 import { getMetadata } from '../../scripts/aem.js';
 import { loadFragment } from '../fragment/fragment.js';
-
+// import {autolinkModals} from "../../scripts/scripts.js"
 // media query match that indicates mobile/tablet width
 const isDesktop = window.matchMedia('(min-width: 900px)');
 
@@ -91,6 +91,7 @@ function toggleMenu(nav, navSections, forceExpanded = null) {
  * @param {Element} block The header block element
  */
 export default async function decorate(block) {
+    //autolinkModals();
   // load nav as fragment
   const navMeta = getMetadata('nav');
   const navPath = navMeta ? new URL(navMeta, window.location).pathname : '/nav';
@@ -107,6 +108,15 @@ export default async function decorate(block) {
     const section = nav.children[i];
     if (section) section.classList.add(`nav-${c}`);
   });
+
+  // const navTools=nav.children[2];
+  // const inputSearch = document.createElement('input');
+  // inputSearch.setAttribute('type', 'text');
+  // inputSearch.setAttribute('placeholder', 'Search');
+  // inputSearch.setAttribute('id', 'input-header');
+  // inputSearch.setAttribute('name', 'search');
+ 
+  // navTools.appendChild(inputSearch);
 
   const navBrand = nav.querySelector('.nav-brand');
   const brandLink = navBrand.querySelector('.button');
@@ -147,3 +157,31 @@ export default async function decorate(block) {
   navWrapper.append(nav);
   block.append(navWrapper);
 }
+
+
+async function getJsonData(url) {
+  try {
+      const response = await fetch(url);
+
+      if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+
+      const data = await response.json();
+      return data;
+  } catch (error) {
+      console.error('Error fetching JSON data:', error);
+      return null;
+  }
+}
+
+// Example usage
+// const url = 'https://main--eds-practice--imjeekxgurjar.hlx.live/searchandbtn.json';
+// getJsonData(url).then(data => {
+//   if (data) {
+//       console.log(data);
+//   } else {
+//       console.log('Failed to retrieve data.');
+//   }
+// });
+

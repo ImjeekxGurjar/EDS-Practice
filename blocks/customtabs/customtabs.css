@@ -1,0 +1,48 @@
+
+.customtabs .tabs-list {
+    display: flex;
+    gap: 8px;
+    max-width: 100%;
+    overflow-x: auto;
+  }
+  
+  .customtabs .tabs-list button {
+    flex: 0 0 max-content;
+    margin: 0;
+    border: 1px solid var(--dark-color);
+    border-radius: 0;
+    padding: 8px 16px;
+    background-color: var(--light-color);
+    color: initial;
+    font-size: unset;
+    font-weight: bold;
+    line-height: unset;
+    text-align: initial;
+    text-overflow: unset;
+    overflow: unset;
+    white-space: unset;
+    transition: background-color 0.2s;
+  }
+  
+  .customtabs .tabs-list button[aria-selected="true"],
+.customtabs .tabs-dropdown option[selected] {
+  border-bottom: 1px solid var(--background-color);
+  background-color: var(--background-color);
+  cursor: initial;
+}
+  
+  .customtabs .tabs-list button[aria-selected="false"]:hover,
+  .customtabs .tabs-list button[aria-selected="false"]:focus {
+    background-color: var(--dark-color);
+  }
+  
+  .customtabs .tabs-panel {
+    margin-top: -1px;
+    padding: 0 16px;
+    border: 1px solid var(--dark-color);
+    overflow: auto;
+  }
+  
+  .customtabs .tabs-panel[aria-hidden="true"] {
+    display: none;
+  }

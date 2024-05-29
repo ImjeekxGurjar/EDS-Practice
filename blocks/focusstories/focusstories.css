@@ -1,0 +1,45 @@
+.section-stories .default-content-wrapper{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.focusstories {
+    display: flex;
+    gap: 20px; /* Adjust the gap size as needed */
+}
+ 
+.StoriesCards {
+    display: flex;
+    flex-direction: column;
+    background-color: #fff; /* Set the background color of the card */
+    overflow: hidden; /* Ensure content doesn't overflow the card */
+    max-width: 300px; /* Set a max width for the cards */
+    width: 100%; /* Ensure the card takes full width within its container */
+}
+ 
+.StoriesCards img {
+    width: 100%; /* Make the image take the full width of the card */
+    height: auto; /* Maintain aspect ratio */
+}
+ 
+.StoriesCards p {
+    margin: 0; /* Remove default margins */
+    font-size: 16px; /* Set a default font size */
+}
+ 
+.StoriesCards p:nth-child(2) {
+    font-weight: bold; /* Make the title bold */
+    font-size: 14px; /* Increase the font size of the title */
+}
+ 
+.StoriesCards p:nth-child(3) {
+    color: #666; /* Set a lighter color for the date */
+    font-size: 14px; /* Slightly smaller font size for the date */
+}
+ 
+.StoriesCards p:nth-child(4) {
+    color: #3B3B3B; /* Set the color for the "Read More" link */
+    font-weight: bold; /* Make the "Read More" link bold */
+    text-align: start; /* Align the "Read More" link to the right */
+}
