@@ -6,6 +6,7 @@ function hasWrapper(el) {
 }
  
 export default async function decorate(block) {
+  console.log(block);
   // build tablist
   const tablist = document.createElement('div');
   tablist.className = 'tabs-list';

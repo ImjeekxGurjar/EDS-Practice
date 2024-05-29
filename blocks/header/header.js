@@ -157,3 +157,31 @@ export default async function decorate(block) {
   navWrapper.append(nav);
   block.append(navWrapper);
 }
+
+
+async function getJsonData(url) {
+  try {
+      const response = await fetch(url);
+
+      if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+
+      const data = await response.json();
+      return data;
+  } catch (error) {
+      console.error('Error fetching JSON data:', error);
+      return null;
+  }
+}
+
+// Example usage
+// const url = 'https://main--eds-practice--imjeekxgurjar.hlx.live/searchandbtn.json';
+// getJsonData(url).then(data => {
+//   if (data) {
+//       console.log(data);
+//   } else {
+//       console.log('Failed to retrieve data.');
+//   }
+// });
+

@@ -31,6 +31,7 @@ function decodeHashToObject() {
 
 function generateHiddenInput(tabSectionIndex, presentTabContents, block) {
   const hashObj = decodeHashToObject();
+  console.log(hashObj);
   for (let i = presentTabContents.length - 1; i > -1; i -= 1) {
     const { tabTitle } = presentTabContents[i].dataset;
     const input = document.createElement('input');
