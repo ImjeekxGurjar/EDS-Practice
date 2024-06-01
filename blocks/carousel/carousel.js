@@ -1,5 +1,15 @@
 import { fetchPlaceholders } from '../../scripts/aem.js';
 
+let carouselId = 0;
+let slideInterval;
+
+function startSlideInterval(block, intervalDuration) {
+  clearInterval(slideInterval);
+  slideInterval = setInterval(() => {
+    showSlide(block, parseInt(block.dataset.activeSlide, 10) + 1);
+  }, intervalDuration);
+}
+
 function updateActiveSlide(slide) {
   const block = slide.closest('.carousel');
   const slideIndex = parseInt(slide.dataset.slideIndex, 10);
@@ -26,6 +36,8 @@ function updateActiveSlide(slide) {
       indicator.querySelector('button').setAttribute('disabled', 'true');
     }
   });
+
+  startSlideInterval(block, block.dataset.slideInterval); // Restart interval with the specified duration
 }
 
 function showSlide(block, slideIndex = 0) {
@@ -40,6 +52,9 @@ function showSlide(block, slideIndex = 0) {
     left: activeSlide.offsetLeft,
     behavior: 'smooth',
   });
+
+  block.dataset.activeSlide = realSlideIndex;
+  updateActiveSlide(activeSlide);
 }
 
 function bindEvents(block) {
@@ -68,6 +83,8 @@ function bindEvents(block) {
   block.querySelectorAll('.carousel-slide').forEach((slide) => {
     slideObserver.observe(slide);
   });
+
+  startSlideInterval(block, block.dataset.slideInterval); // Start interval with the specified duration
 }
 
 function createSlide(row, slideIndex, carouselId) {
@@ -89,10 +106,19 @@ function createSlide(row, slideIndex, carouselId) {
   return slide;
 }
 
-let carouselId = 0;
+function getSlideIntervalFromMeta() {
+  const metaTag = document.querySelector('meta[name="carousel-interval"]');
+  if (metaTag) {
+    const interval = parseInt(metaTag.getAttribute('content'), 10);
+    return !isNaN(interval) ? interval * 1000 : 10000; // Convert seconds to milliseconds
+  }
+  return 10000; // Default to 10 seconds
+}
+
 export default async function decorate(block) {
   carouselId += 1;
   block.setAttribute('id', `carousel-${carouselId}`);
+  block.dataset.slideInterval = getSlideIntervalFromMeta();
   const rows = block.querySelectorAll(':scope > div');
   const isSingleSlide = rows.length < 2;
 
@@ -120,7 +146,7 @@ export default async function decorate(block) {
     const slideNavButtons = document.createElement('div');
     slideNavButtons.classList.add('carousel-navigation-buttons');
     slideNavButtons.innerHTML = `
-      <button type="button" class= "slide-prev" aria-label="${placeholders.previousSlide || 'Previous Slide'}"></button>
+      <button type="button" class="slide-prev" aria-label="${placeholders.previousSlide || 'Previous Slide'}"></button>
       <button type="button" class="slide-next" aria-label="${placeholders.nextSlide || 'Next Slide'}"></button>
     `;
 

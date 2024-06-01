@@ -48,7 +48,9 @@
   .carousel .carousel-slide .carousel-slide-image picture > img {
     height: 100%;
     width: 100%;
-    object-fit: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
   }
   
   .carousel .carousel-slide .carousel-slide-content {
@@ -80,7 +82,6 @@
   }
   
   .carousel .carousel-slide-indicator button:disabled,
-  .carousel .carousel-slide-indicator button:hover,
   .carousel .carousel-slide-indicator button:focus-visible {
     background-image: linear-gradient(to right, #DDD 50%, #FFF 50%);
     width: 6rem;
@@ -188,3 +189,51 @@
     max-width: unset;
   }
 
+  .section.col12 .carousel-navigation-buttons{
+    display: none;
+  }
+
+  .section.col12 .carousel-slide-content .button-container a{
+    background: #3CB8FF;
+    border-radius: 2px;
+    box-sizing: border-box;
+    padding: 12px 20px;
+    font-size: 14px;
+  }
+
+  .section.col12 .carousel-slide-content h2{
+    margin: 0;
+  }
+
+  .section.col12 .carousel-slide-content {
+    background: inherit;
+  }
+
+  .section.col12 .carousel-slide-content p{
+    font-size: 1rem;
+    font-weight: 300;
+  }
+
+  .section.col12 .carousel-slide-content h2:first-child{
+    font-size: 36px;
+    font-weight: 300;
+  }
+  .section.col12 .carousel-slide-content h2:nth-of-type(2){
+    font-size: 54px;
+    font-weight: 600;
+  }
+
+  .section.col12 .carousel .carousel-slide-indicator {
+    position: relative;
+    top: -50px;
+  }
+
+  .section.col12 .carousel-slide-content .button-container:last-child a{
+    background: inherit;
+    border-radius: 2px;
+    box-sizing: border-box;
+    padding: 12px 20px;
+    font-size: 14px;
+  }
+
+  

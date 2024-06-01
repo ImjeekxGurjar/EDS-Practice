@@ -294,4 +294,12 @@ header nav .nav-tools input[type=text]{
   padding: 12px 20px 12px 40px;
 }
 
+.header .section .default-content-wrapper .button-container a{
+  background:#3CB8FF;
+  border-radius:2px;
+  box-sizing: border-box;
+  padding:12px 20px;
+  font-size: 14px;
+}
+
 

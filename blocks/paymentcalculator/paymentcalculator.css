@@ -49,10 +49,10 @@
 	justify-content: space-between;
 }
 
-.footer {
+/* .footer {
 	display: flex;
 	justify-content: space-between;
-}
+} */
 
 /*----- Styling the sliders ----*/
 input[type="range"] {
@@ -173,4 +173,8 @@ input[type="range"]:focus::-ms-fill-upper {
 	content: "Monthly Payable:";
 	font-size: 12px;
 	display: block;
+}
+
+.section.paymentcalculator-container{
+	padding-top:0;
 }

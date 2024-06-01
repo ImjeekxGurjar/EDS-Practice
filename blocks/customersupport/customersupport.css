@@ -11,7 +11,7 @@
     background: #F4F8EB;
   }
 
-  .default-content-wrapper :is(h1, h2, h3, h4, h5, h6) {
+  .customersupportcomp .default-content-wrapper :is(h1, h2, h3, h4, h5, h6) {
     margin: 0;
     padding: 15px;
     font-weight: 500;
@@ -34,6 +34,7 @@
   
   .customersupportcomp .customersupport ul {
     display: flex;
+    flex-wrap: wrap;
     padding: 0;
     margin: 0;
     list-style: none;
