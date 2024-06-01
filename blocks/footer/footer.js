@@ -43,5 +43,16 @@ export default async function decorate(block) {
     });
   }
 
+  const thirdsection = footer.querySelector('.third-section-wrapper > .third-section');
+  console.log(thirdsection);
+  const enterinside = thirdsection.querySelector('div');
+  enterinside.classList.add('third-section_part');
+  const enterinsidediv = enterinside.querySelectorAll('div');
+  enterinsidediv.forEach((elm)=>{
+  elm.classList.add('third-section_part-subparts');
+  })
+  
+  
+
   block.append(footer);
 }
