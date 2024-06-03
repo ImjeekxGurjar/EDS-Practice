@@ -1,0 +1,78 @@
+.some-thing-went-wrong {
+    /* background: #09001F; */
+    width: 100%;
+    height: 500px;
+    padding:unset!important;
+    background-image: url(../../icons/errorbackground.png);
+  }
+
+  .somethingwrongpage.block{
+justify-content: center;
+align-items: center;
+display: flex;
+  }
+  
+  .some-thing-went-wrong .in-view-hero {
+    width: 653px;
+    height: 500px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color:white;
+  }
+  
+  .some-thing-went-wrong .inner-content {
+    position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.5); /* Optional: Adds a semi-transparent background to the text */
+  text-align: center;
+  }
+  
+  .some-thing-went-wrong #something-went-wrong {
+    margin: 0;
+    font-size: 2rem;
+    margin-bottom: 10px;
+  }
+  
+  .some-thing-went-wrong #please-return-to {
+    margin: 0;
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+
+  }
+  
+  .some-thing-went-wrong .button-container {
+    display: inline-block;
+    margin: 0 10px;
+  }
+  
+  .some-thing-went-wrong  .button-container a {
+    display: inline-block;
+    padding: 10px 20px;
+    color: #fff;
+    background-color: #007bff;
+    border: none;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 1rem;
+  }
+  
+  .some-thing-went-wrong .inner-picture {
+    display: flex;
+    justify-content: center;
+  }
+  
+  .some-thing-went-wrong  .inner-picture img {
+    width: 653px;
+  height: 500px;
+  object-fit: cover;
+  }
+  
