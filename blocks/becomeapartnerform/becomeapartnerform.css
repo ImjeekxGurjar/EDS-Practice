@@ -1,0 +1,58 @@
+.form-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.input-container {
+    margin-bottom: 10px;
+}
+
+.form-input {
+    width: 100%;
+    padding: 8px;
+    margin-top: 4px;
+}
+
+.error-field {
+    color: red;
+    font-size: 12px;
+    margin-top: 4px;
+}
+
+.product-label, .location-label {
+    margin-top: 20px;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+.product-buttons-container, .location-buttons-container {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.product-button, .location-button, .submit-button {
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
+.submit-button {
+    margin-top: 20px;
+}
+
+.product-button, .location-button {
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.product-button:hover, .location-button:hover, .submit-button:hover {
+    background-color: #0056b3;
+}
+
+.product-button.active, .location-button.active {
+    background-color: green;
+}

@@ -49,10 +49,6 @@
 	justify-content: space-between;
 }
 
-/* .footer {
-	display: flex;
-	justify-content: space-between;
-} */
 
 /*----- Styling the sliders ----*/
 input[type="range"] {
@@ -177,4 +173,33 @@ input[type="range"]:focus::-ms-fill-upper {
 
 .section.paymentcalculator-container{
 	padding-top:0;
+}
+
+.range-values {
+    display: flex;
+    justify-content: space-between;
+}
+.details input[type="number"] {
+    max-width: 120px;
+    width: 100%;
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+ 
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+.inputDetail {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#pieChart{
+	width:300px!important;
+	height: 300px!important;
 }

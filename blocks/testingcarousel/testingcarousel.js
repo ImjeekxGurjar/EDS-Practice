@@ -137,6 +137,11 @@ export default async function decorate(block) {
             termAndCondition.textContent = termAndConditionText;
             paginationContainer.appendChild(termAndCondition);
 
+            // Utility function to format number with leading zeros
+            const formatNumber = (number, length) => {
+                return number.toString().padStart(length, '0');
+            };
+
             // Create previous arrow button
             const prevButton = document.createElement('button');
             prevButton.innerHTML = '&lt;'; // Previous arrow symbol
@@ -149,7 +154,7 @@ export default async function decorate(block) {
             const slideCount = $(carousel).slick('getSlick').slideCount;
             for (let i = 0; i < slideCount; i++) {
                 const button = document.createElement('button');
-                button.textContent = i + 1;
+                button.textContent = formatNumber(i + 1, 2); // Format with leading zeros
                 button.addEventListener('click', () => {
                     $(carousel).slick('slickGoTo', i);
                 });
