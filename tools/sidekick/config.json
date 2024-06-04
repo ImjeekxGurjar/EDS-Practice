@@ -1,6 +1,6 @@
 {
-    "project": "Sunstar",
-    "host": "main--edge--suraj-v23.hlx.live/",
+    "project": "eds-practice",
+    "host": "https://main--eds-practice--imjeekxgurjar.hlx.page/",
     "plugins": [
       {
         "id": "library",
