@@ -2,15 +2,13 @@
     overflow-x: hidden; /* so we could easily hide the radio inputs */
 	margin: 32px 0;
 	padding-bottom: 16px;
-	/* border-bottom: 1px solid #ccc */
 }
 
 .section.tabs-wrapper{
-	padding-top:unset;
+	padding-top:0;
 }
 
 .tabs [type="radio"] {
-	/* hiding the inputs */
 	display: none;
 }
 
@@ -107,7 +105,6 @@
 	color: #fFF;
 	border-radius:4px;
 	font-size: 14px;
-    /* border-color: #005AFF; */
 	background:#3CB8FF;
 	;
     text-shadow: -0.4px -0.4px 0 #005AFF, 0.4px 0.3px #005AFF;
@@ -159,7 +156,6 @@
 }
 
 .section.tabs-wrapper.tabs-container .tabs-control a{
-	/* padding:unset; */
 	font-size: 14px;
 	padding:10px;
 }
