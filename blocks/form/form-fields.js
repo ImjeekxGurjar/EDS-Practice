@@ -4,9 +4,7 @@ function createFieldWrapper(fd) {
   const fieldWrapper = document.createElement('div');
   if (fd.Style) fieldWrapper.className = fd.Style;
   fieldWrapper.classList.add('field-wrapper', `${fd.Type}-wrapper`);
-
   fieldWrapper.dataset.fieldset = fd.Fieldset;
-
   return fieldWrapper;
 }
 
@@ -19,10 +17,15 @@ function generateFieldId(fd, suffix = '') {
   return `${slug}${idSuffix}`;
 }
 
+//  if label exist then show otherwise not 
 function createLabel(fd) {
+  const labelText = fd.Label;
+  if (!labelText) {
+    return null;
+  }
   const label = document.createElement('label');
   label.id = generateFieldId(fd, '-label');
-  label.textContent = fd.Label || fd.Name;
+  label.textContent = labelText;
   label.setAttribute('for', fd.Id);
   return label;
 }
@@ -37,26 +40,20 @@ function setCommonAttributes(field, fd) {
 
 const createHeading = (fd) => {
   const fieldWrapper = createFieldWrapper(fd);
-
   const level = fd.Style && fd.Style.includes('sub-heading') ? 3 : 2;
   const heading = document.createElement(`h${level}`);
   heading.textContent = fd.Value || fd.Label;
   heading.id = fd.Id;
-
   fieldWrapper.append(heading);
-
   return { field: heading, fieldWrapper };
 };
 
 const createPlaintext = (fd) => {
   const fieldWrapper = createFieldWrapper(fd);
-
   const text = document.createElement('p');
   text.textContent = fd.Value || fd.Label;
   text.id = fd.Id;
-
   fieldWrapper.append(text);
-
   return { field: text, fieldWrapper };
 };
 
@@ -103,14 +100,16 @@ const createSelect = async (fd) => {
 
   const fieldWrapper = createFieldWrapper(fd);
   fieldWrapper.append(select);
-  fieldWrapper.append(createLabel(fd));
+  const label = createLabel(fd);
+  if (label) {
+    fieldWrapper.append(label);
+  }
 
   return { field: select, fieldWrapper };
 };
 
 const createConfirmation = (fd, form) => {
   form.dataset.confirmation = new URL(fd.Value).pathname;
-
   return {};
 };
 
@@ -131,23 +130,28 @@ const createTextArea = (fd) => {
 
   const fieldWrapper = createFieldWrapper(fd);
   const label = createLabel(fd);
-  field.setAttribute('aria-labelledby', label.id);
+  if (label) {
+    field.setAttribute('aria-labelledby', label.id);
+    fieldWrapper.append(label);
+  }
   fieldWrapper.append(field);
-  fieldWrapper.append(label);
 
   return { field, fieldWrapper };
 };
 
 const createInput = (fd) => {
   const field = document.createElement('input');
+  console.log(field);
   field.type = fd.Type;
   setCommonAttributes(field, fd);
 
   const fieldWrapper = createFieldWrapper(fd);
   const label = createLabel(fd);
-  field.setAttribute('aria-labelledby', label.id);
+  if (label) {
+    field.setAttribute('aria-labelledby', label.id);
+    fieldWrapper.append(label);
+  }
   fieldWrapper.append(field);
-  fieldWrapper.append(label);
 
   return { field, fieldWrapper };
 };

@@ -155,7 +155,7 @@ export default async function decorate(block) {
         //     }
         // });
 
-        const form = document.querySelector('form[data-action="/become-a-partner"]');
+    const form = document.querySelector('form[data-action="/become-a-partner"]');
 
     form.addEventListener('submit', function (event) {
         event.preventDefault(); // Prevent form submission
