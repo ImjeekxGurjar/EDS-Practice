@@ -1,5 +1,6 @@
 import { toClassName } from '../../scripts/aem.js';
 
+// Function to create a field wrapper for each form field
 function createFieldWrapper(fd) {
   const fieldWrapper = document.createElement('div');
   if (fd.Style) fieldWrapper.className = fd.Style;
@@ -8,6 +9,7 @@ function createFieldWrapper(fd) {
   return fieldWrapper;
 }
 
+// Function to generate unique field IDs
 const ids = [];
 function generateFieldId(fd, suffix = '') {
   const slug = toClassName(`form-${fd.Name}${suffix}`);
@@ -17,7 +19,7 @@ function generateFieldId(fd, suffix = '') {
   return `${slug}${idSuffix}`;
 }
 
-//  if label exist then show otherwise not 
+// Function to create a label for a form field
 function createLabel(fd) {
   const labelText = fd.Label;
   if (!labelText) {
@@ -30,6 +32,7 @@ function createLabel(fd) {
   return label;
 }
 
+// Function to set common attributes for form fields
 function setCommonAttributes(field, fd) {
   field.id = fd.Id;
   field.name = fd.Name;
@@ -38,6 +41,7 @@ function setCommonAttributes(field, fd) {
   field.value = fd.Value;
 }
 
+// Function to create a heading field
 const createHeading = (fd) => {
   const fieldWrapper = createFieldWrapper(fd);
   const level = fd.Style && fd.Style.includes('sub-heading') ? 3 : 2;
@@ -48,6 +52,7 @@ const createHeading = (fd) => {
   return { field: heading, fieldWrapper };
 };
 
+// Function to create a plaintext field
 const createPlaintext = (fd) => {
   const fieldWrapper = createFieldWrapper(fd);
   const text = document.createElement('p');
@@ -57,6 +62,7 @@ const createPlaintext = (fd) => {
   return { field: text, fieldWrapper };
 };
 
+// Function to create a select dropdown field
 const createSelect = async (fd) => {
   const select = document.createElement('select');
   setCommonAttributes(select, fd);
@@ -98,6 +104,7 @@ const createSelect = async (fd) => {
     options.forEach((opt) => addOption(opt));
   }
 
+
   const fieldWrapper = createFieldWrapper(fd);
   fieldWrapper.append(select);
   const label = createLabel(fd);
@@ -108,11 +115,13 @@ const createSelect = async (fd) => {
   return { field: select, fieldWrapper };
 };
 
+// Function to create a confirmation field
 const createConfirmation = (fd, form) => {
   form.dataset.confirmation = new URL(fd.Value).pathname;
   return {};
 };
 
+// Function to create a submit button field
 const createSubmit = (fd) => {
   const button = document.createElement('button');
   button.textContent = fd.Label || fd.Name;
@@ -124,6 +133,7 @@ const createSubmit = (fd) => {
   return { field: button, fieldWrapper };
 };
 
+// Function to create a textarea field
 const createTextArea = (fd) => {
   const field = document.createElement('textarea');
   setCommonAttributes(field, fd);
@@ -139,9 +149,9 @@ const createTextArea = (fd) => {
   return { field, fieldWrapper };
 };
 
+// Function to create an input field
 const createInput = (fd) => {
   const field = document.createElement('input');
-  console.log(field);
   field.type = fd.Type;
   setCommonAttributes(field, fd);
 
@@ -156,6 +166,7 @@ const createInput = (fd) => {
   return { field, fieldWrapper };
 };
 
+// Function to create a fieldset
 const createFieldset = (fd) => {
   const field = document.createElement('fieldset');
   setCommonAttributes(field, fd);
@@ -172,6 +183,7 @@ const createFieldset = (fd) => {
   return { field, fieldWrapper };
 };
 
+// Function to create a toggle (checkbox) field
 const createToggle = (fd) => {
   const { field, fieldWrapper } = createInput(fd);
   field.type = 'checkbox';
@@ -194,22 +206,48 @@ const createToggle = (fd) => {
   return { field, fieldWrapper };
 };
 
+// Function to create a checkbox field
 const createCheckbox = (fd) => {
   const { field, fieldWrapper } = createInput(fd);
-  if (!field.value) field.value = 'checked';
+  // Get the label element associated with the checkbox
+  const label = fieldWrapper.querySelector('label');
+  // Extract the text content of the label
+  const labelText = label.textContent;
+  
+  if (!field.value) field.value = labelText;
   fieldWrapper.classList.add('selection-wrapper');
 
-  return { field, fieldWrapper };
+  // Add event listener to the checkbox to toggle the "checked" class
+  field.addEventListener('change', () => {
+    if (field.checked) {
+      fieldWrapper.classList.add('checked');
+    } else {
+      fieldWrapper.classList.remove('checked');
+    }
+  });
+  return { field, fieldWrapper, labelText};
 };
 
+// Function to create a radio button field
 const createRadio = (fd) => {
   const { field, fieldWrapper } = createInput(fd);
   if (!field.value) field.value = fd.Label || 'on';
   fieldWrapper.classList.add('selection-wrapper');
-
+   // Add event listener to the radio button
+   field.addEventListener('change', () => {
+    // Remove "selected" class from all radio button wrappers
+    document.querySelectorAll('.selection-wrapper').forEach(wrapper => {
+      wrapper.classList.remove('selected');
+    });
+    // Add "selected" class to the wrapper of the currently selected radio button
+    if (field.checked) {
+      fieldWrapper.classList.add('selected');
+    }
+  });
   return { field, fieldWrapper };
 };
 
+// Object containing functions to create different types of form fields
 const FIELD_CREATOR_FUNCTIONS = {
   select: createSelect,
   heading: createHeading,
@@ -223,6 +261,7 @@ const FIELD_CREATOR_FUNCTIONS = {
   radio: createRadio,
 };
 
+// Function to create a form field based on its type
 export default async function createField(fd, form) {
   fd.Id = fd.Id || generateFieldId(fd);
   const type = fd.Type.toLowerCase();
