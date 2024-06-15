@@ -151,6 +151,7 @@
 
 // loadPage();
 // export{autolinkModals}
+// import { initMediaCustomCarousel } from '../blocks/mediacustomcarousel/mediacustomcarousel.js';
 
 import {
   sampleRUM,
@@ -168,6 +169,26 @@ import {
   decorateBlock,
   loadBlock, updateSectionsStatus,
 } from './lib-franklin.js';
+
+export function createElement(tagName, options = {}) {
+  const { classes = [], props = {} } = options;
+  const elem = document.createElement(tagName);
+  const isString = typeof classes === 'string';
+  if (classes || (isString && classes !== '') || (!isString && classes.length > 0)) {
+    const classesArr = isString ? [classes] : classes;
+    elem.classList.add(...classesArr);
+  }
+  if (!isString && classes.length === 0) elem.removeAttribute('class');
+
+  if (props) {
+    Object.keys(props).forEach((propName) => {
+      const value = propName === props[propName] ? '' : props[propName];
+      elem.setAttribute(propName, value);
+    });
+  }
+
+  return elem;
+}
 
 const LCP_BLOCKS = []; // add your LCP blocks to the list
 window.hlx.RUM_GENERATION = 'project-1'; // add your RUM generation information here
@@ -200,6 +221,59 @@ function buildAutoBlocks(main) {
   }
 }
 
+function createMediaCarouselLineupSection(mediaitems) {
+  const mediaSection = createElement('div', { classes: 'section' });
+  mediaSection.dataset.sectionStatus = 'initialized';
+  const wrapper = createElement('div');
+  mediaSection.append(wrapper);
+  const tabBlock = buildBlock('mediacustomcarousel', [mediaitems]);
+  wrapper.append(tabBlock);
+  return mediaSection;
+}
+
+function loadMediaCustomCarousel(main) {
+  const mediaitems = [];
+  let nextElement;
+  const mainchildren = [...main.querySelectorAll(':scope > div')];
+  console.log(mainchildren);
+  mainchildren.forEach((section,i) => {
+    console.log(section,i)
+    const isMediaCarousel = section.dataset.mediacarousel;
+    console.log(isMediaCarousel);
+    if (!isMediaCarousel) {
+      console.log("Section is not a media carousel. Skipping...");
+      return;
+  }
+    nextElement = mainchildren[i + 1];
+    if(!nextElement){
+      return;
+    }
+     console.log(nextElement);
+    const sectionMeta = section.dataset;
+    console.log(sectionMeta);
+    const MediaContent = createElement('div', { classes: 'v2-media' });
+    Object.entries(sectionMeta).forEach(([key, value]) => {
+      MediaContent.dataset[key] = value;
+    });
+    MediaContent.innerHTML = section.innerHTML;
+    const pushed = mediaitems.push(MediaContent);
+    console.log(pushed);
+    section.remove();
+  })
+  if (mediaitems.length > 0) {
+    const truckLineupSection = createMediaCarouselLineupSection(mediaitems);
+    console.log(truckLineupSection);
+    if(nextElement){
+      main.insertBefore(truckLineupSection, nextElement);
+    }
+    else{
+      main.append(truckLineupSection);
+    }
+    decorateIcons(truckLineupSection);
+    decorateBlock(truckLineupSection.querySelector('.mediacustomcarousel'))
+  }
+}
+
 function autolinkModals(element) {
   element.addEventListener('click', async (e) => {
     const origin = e.target.closest('a');
@@ -224,6 +298,7 @@ export function decorateMain(main) {
   buildAutoBlocks(main);
   decorateSections(main);
   decorateBlocks(main);
+  loadMediaCustomCarousel(main);
 }
 
 /**
