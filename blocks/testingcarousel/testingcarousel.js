@@ -15,7 +15,7 @@ export default async function decorate(block) {
         // Fetch JSON data from the provided URL
         const response = await fetch('https://main--eds-practice--imjeekxgurjar.hlx.page/testingcarousel.json');
         const responseData = await response.json();
-        console.log(responseData);
+        // console.log(responseData);
 
         // Check if data is available and has the correct structure
         if (responseData && Array.isArray(responseData.data)) {

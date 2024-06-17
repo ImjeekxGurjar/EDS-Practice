@@ -210,7 +210,7 @@
         transition: background-color 0.3s;
     }
 
-    .selection-wrapper input[type="checkbox"]:checked+label {
+    .selection-wrapper.checked label{
         background-color: green;
     }
 
@@ -232,6 +232,52 @@
 
     .submit-wrapper .button:hover {
         background-color: #0056b3;
+    }
+
+    /* for radio btns  */
+
+    .selection-wrapper input[type="radio"] {
+        display: none;
+    }
+
+    .selection-wrapper label {
+        cursor: pointer;
+        padding: 5px 10px;
+        background-color: #007BFF;
+        color: white;
+        border-radius: 4px;
+        transition: background-color 0.3s;
+    }
+
+    .selection-wrapper.selected label {
+        background-color: green;
+    }
+
+    .selection-wrapper label:hover {
+        background-color: #0056b3;
+    }
+
+    .button:disabled{
+        opacity: 0.5;
+        cursor:not-allowed;
+    }
+
+    .error-message{
+        color:red;
+        font-size: 14px;
+    }
+
+    .form2.field-wrapper.plaintext-wrapper .inactive{
+        color:black;
+        font-size: 14px;
+        opacity: 0.5;
+        cursor:not-allowed;
+    }
+
+    .form2.field-wrapper.plaintext-wrapper .active{
+        color:blue;
+        font-size: 14px;
+        cursor: pointer;
     }
 
 }

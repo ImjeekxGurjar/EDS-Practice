@@ -52,6 +52,7 @@
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
+    object-fit: cover;
   }
  
  
@@ -190,60 +191,10 @@
     }
   }
 
-  /* custom  */
-  main .col12{
-    padding:unset;
-  }
-
-  .col12 .carousel-wrapper{
-    max-width: unset;
-  }
-
-  .section.col12 .carousel-navigation-buttons{
-    display: none;
-  }
-
-  .section.col12 .carousel-slide-content .button-container a{
-    background: #3CB8FF;
-    border-radius: 2px;
-    box-sizing: border-box;
-    padding: 12px 20px;
-    font-size: 14px;
-  }
-
-  .section.col12 .carousel-slide-content h2{
-    margin: 0;
-  }
-
-  .section.col12 .carousel-slide-content {
-    background: inherit;
-  }
-
-  .section.col12 .carousel-slide-content p{
-    font-size: 1rem;
-    font-weight: 300;
-  }
-
-  .section.col12 .carousel-slide-content h2:first-child{
-    font-size: 36px;
-    font-weight: 300;
-  }
-  .section.col12 .carousel-slide-content h2:nth-of-type(2){
-    font-size: 54px;
-    font-weight: 600;
-  }
-
-  .section.col12 .carousel .carousel-slide-indicator {
-    position: relative;
-    top: -50px;
-  }
-
-  .section.col12 .carousel-slide-content .button-container:last-child a{
-    background: inherit;
-    border-radius: 2px;
-    box-sizing: border-box;
-    padding: 12px 20px;
-    font-size: 14px;
-  }
-
-  
+main .media-carousel-section {
+  padding:unset;
+}
+.media-carousel-section > div{
+  max-width: none;
+  margin: auto;
+}

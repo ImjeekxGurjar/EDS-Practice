@@ -26,7 +26,7 @@ export default async function decorate(block) {
   });
 
   const footerSections = footer.querySelector('.footer-footer-1'); // Adjust the selector as needed
-  console.log(footerSections);
+  // console.log(footerSections);
   if (footerSections) {
     footerSections.querySelectorAll(':scope .default-content-wrapper > ul > li').forEach((footerSection) => {
       footerSection.setAttribute('aria-expanded', 'false');
@@ -44,7 +44,7 @@ export default async function decorate(block) {
   }
 
   const thirdsection = footer.querySelector('.third-section-wrapper > .third-section');
-  console.log(thirdsection);
+  // console.log(thirdsection);
   const enterinside = thirdsection.querySelector('div');
   enterinside.classList.add('third-section_part');
   const enterinsidediv = enterinside.querySelectorAll('div');
