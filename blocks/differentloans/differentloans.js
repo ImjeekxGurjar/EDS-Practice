@@ -25,18 +25,43 @@ const SELECTORS = {
     block.appendChild(title);
   }
    
+  // function createTabs(block) {
+  //   const tabsContainer = document.createElement('div');
+  //   tabsContainer.classList.add(CREATE_SELECTOR_CLASS.tabsContainer);
+  //   block.appendChild(tabsContainer);
+   
+  //   const tabNames = ['All', 'Housing', 'Business'];
+  //   tabNames.forEach((tabName) => {
+  //     const tab = document.createElement('button');
+  //     tab.classList.add('tab');
+  //     tab.textContent = tabName;
+  //     tab.dataset.tabName = tabName.toLowerCase();
+  //     tabsContainer.appendChild(tab);
+  //   });
+   
+  //   return tabsContainer;
+  // }
   function createTabs(block) {
+    // Create the outer container
     const tabsContainer = document.createElement('div');
     tabsContainer.classList.add(CREATE_SELECTOR_CLASS.tabsContainer);
     block.appendChild(tabsContainer);
    
+    // Create the inner container for the buttons
+    const buttonsContainer = document.createElement('div');
+    buttonsContainer.classList.add('buttons-container');
+    tabsContainer.appendChild(buttonsContainer);
+   
+    // Define the tab names
     const tabNames = ['All', 'Housing', 'Business'];
+   
+    // Create and append buttons to the inner container
     tabNames.forEach((tabName) => {
       const tab = document.createElement('button');
       tab.classList.add('tab');
       tab.textContent = tabName;
       tab.dataset.tabName = tabName.toLowerCase();
-      tabsContainer.appendChild(tab);
+      buttonsContainer.appendChild(tab);
     });
    
     return tabsContainer;
@@ -56,7 +81,8 @@ const SELECTORS = {
     if (tabName === 'all') {
       filteredData = data;
     } else {
-      filteredData = data.filter((item) => item.category.toLowerCase() === tabName);
+      // filteredData = data.filter((item) => item.category.toLowerCase() === tabName);
+      filteredData = data.filter((item) => item.category.toLowerCase().split(',').includes(tabName));
       console.log(filteredData);
     }
    

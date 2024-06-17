@@ -409,9 +409,11 @@ export default async function decorate(block) {
                       event.preventDefault();
                       if (this.classList.contains('rotate')) {
                         this.classList.remove('rotate');
+                        belowNavMainContainer.classList.remove('show');
                       } else {
                         navLinks.forEach(link => link.classList.remove('rotate'));
                         this.classList.add('rotate');
+                        belowNavMainContainer.classList.add('show');
                       }
                     });
                   });
@@ -583,6 +585,7 @@ export default async function decorate(block) {
         // Add 'active' class to the clicked item
         item.classList.add('active');
         // Remove 'active' class from all sublists and add it to the corresponding sublist
+        thirdElementDiv.innerHTML='';
         subLists.forEach(subList => subList.classList.remove('active'));
         if (index < subLists.length) {
           subLists[index].classList.add('active');
@@ -590,13 +593,23 @@ export default async function decorate(block) {
       });
     });
           const anchorTags = secondElementDiv.querySelectorAll('.anchorPath');
+          // anchorTags.forEach(anchor => {
+          //     anchor.addEventListener('click', () => {
+          //       console.log(anchor.getAttribute('href'));  // Use the href value as needed
+          //         let imagePath = anchor.getAttribute('href');
+          //         displayURLContent(imagePath, thirdElementDiv);
+          //     });
+          // });
           anchorTags.forEach(anchor => {
-              anchor.addEventListener('click', () => {
-                console.log(anchor.getAttribute('href'));  // Use the href value as needed
-                  let imagePath = anchor.getAttribute('href');
-                  displayURLContent(imagePath, thirdElementDiv);
-              });
-          });
+            anchor.addEventListener('click', function () {
+                anchorTags.forEach(anchor => anchor.classList.remove('anchor_active'));
+                // Add 'anchor_active' class to the clicked anchor
+                this.classList.add('anchor_active');  
+                console.log(this.getAttribute('href'));
+                let imagePath = this.getAttribute('href');
+                displayURLContent(imagePath, thirdElementDiv);
+            });
+        });
  
           parentContainerDiv.appendChild(thirdElementDiv);
           belowNavMainContainer.appendChild(parentContainerDiv);
