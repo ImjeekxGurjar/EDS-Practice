@@ -18,6 +18,9 @@
     padding: 20px;
     max-width: 600px;
 }
+.teaser-wrapper div > div > p {
+    font-size: 14px;
+  }
 
 .teaser p {
     margin: 10px 0;
@@ -48,7 +51,7 @@ button {
     left: 0;
     width: 100%;
     height: 100%;
-    overflow: hidden;
+    /* overflow: hidden; */
     z-index: -1;
 }
 

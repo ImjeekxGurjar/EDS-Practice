@@ -49,7 +49,7 @@ footer .footer-footer-1 .default-content-wrapper li {
 }
 
 footer .footer-footer-1 .default-content-wrapper li strong{
-  display: block;
+  /* display: block; */
   margin-bottom: 5px;
 }
 

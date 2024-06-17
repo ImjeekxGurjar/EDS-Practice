@@ -665,8 +665,8 @@ const handleBackgroundStyle = (container, block) => {
                 console.log(`Picture ${index + 1} Image Source: Not found`);
             }
         });
-        console.log('Desktop Image Source:', desktopImageSrc);
-        console.log('Mobile Image Source:', mobileImageSrc);
+        // console.log('Desktop Image Source:', desktopImageSrc);
+        // console.log('Mobile Image Source:', mobileImageSrc);
         const applyBackgroundImage = () => {
             container.style.backgroundImage = `url(${window.innerWidth < 600 ? mobileImageSrc : desktopImageSrc})`;
         };
@@ -690,8 +690,8 @@ const handleBackgroundStyle = (container, block) => {
         }
     });
 
-    console.log('YouTube video URL:', videoUrl);
-    console.log('MP4 video URL:', mp4VideoUrl);
+    // console.log('YouTube video URL:', videoUrl);
+    // console.log('MP4 video URL:', mp4VideoUrl);
 
     if (mp4VideoUrl) {
         createVideoBackground(container, mp4VideoUrl);
@@ -756,7 +756,8 @@ const createVideoPopup = (container, videoUrl) => {
 
 const createImageBackground = (container, imageUrl) => {
     container.style.backgroundImage = `url(${imageUrl})`;
-    container.style.backgroundSize = 'cover';
+    // container.style.backgroundSize = 'cover';
+    container.style.backgroundSize = '100% 100%';
     container.style.backgroundPosition = 'center';
 };
 
