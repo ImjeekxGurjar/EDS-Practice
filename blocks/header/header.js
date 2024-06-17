@@ -335,10 +335,10 @@ export default async function decorate(block) {
       block.append(navWrapper);
 
       var navElement = document.getElementById("nav");
-      console.log(navElement);
+      // console.log(navElement);
   // my js called
 
-      console.log('js called');
+      // console.log('js called');
 
       const api = "https://main--eds-practice--imjeekxgurjar.hlx.page/nav-element/globalnavigation.json";
       let responseData = [];
@@ -428,48 +428,127 @@ export default async function decorate(block) {
           a.addEventListener('click', function(event) {
             event.preventDefault(); // Prevents the default action of clicking on a link
             // Optionally, you can handle what happens on click here
-            console.log("Link clicked:", href);
+            // console.log("Link clicked:", href);
         });
           li.appendChild(a);
           return li;
         }
 
+        // function getChildResponseData(childResponseData) {
+        //   parentContainerDiv.innerHTML = '';
+
+        //   console.log(childResponseData.depth);
+
+        //   const firstElementChildDiv = document.createElement('div');
+        //   firstElementChildDiv.className = 'firstElementChildDiv';
+
+        //   const secondElementDiv = document.createElement('div');
+        //   secondElementDiv.className = 'secondElementDiv';
+        //   console.log(secondElementDiv);
+
+        //   const thirdElementDiv = document.createElement('div');
+        //   thirdElementDiv.className = 'thirdElementDiv';
+
+        //   const ul = document.createElement('ul');
+
+        //   console.log(childResponseData);
+        //   if (typeof childResponseData === 'object' && childResponseData !== null) {
+        //       // Iterate over object keys
+        //       for (const key in childResponseData) {
+
+        //           if (childResponseData.hasOwnProperty(key)) {
+        //               const item = childResponseData[key];
+        //               const li = createListElement(key);
+        //               ul.appendChild(li);
+
+        //               // Check if the item has children and process them
+        //               if (Array.isArray(item)) {
+        //                   const subUl = document.createElement('ul');
+        //                   subUl.className = 'subList';
+        //                   item.forEach((subItem) => {
+        //                     console.log(subItem);
+        //                       subUl.appendChild(createListElement(subItem.title, subItem.path));
+        //                       console.log(subItem.depth);
+
+        //                   });
+        //                   secondElementDiv.appendChild(subUl);
+        //               }
+        //           }
+        //       }
+        //   } else {
+        //       console.error("childResponseData is not an array or object.");
+        //   }
+
+        //   firstElementChildDiv.appendChild(ul);
+        //   parentContainerDiv.appendChild(firstElementChildDiv);
+        //   parentContainerDiv.appendChild(secondElementDiv);
+
+        //   // By default, show the first sublist
+        //   const firstSubList = secondElementDiv.querySelector('.subList');
+        //   if (firstSubList) {
+        //       firstSubList.classList.add('active');
+        //   }
+
+        //   // Add event listeners to show/hide the sublists
+        //   const mainItems = firstElementChildDiv.querySelectorAll('.listElement');
+        //   const subLists = secondElementDiv.querySelectorAll('.subList');
+        //   mainItems.forEach((item, index) => {
+        //       item.addEventListener('click', () => {
+        //           subLists.forEach((subList) => subList.classList.remove('active'));
+        //           subLists[index].classList.add('active');
+        //       });
+        //       item.addEventListener('click', () => {
+        //           subLists.forEach((subList) => subList.classList.remove('active'));
+        //           subLists[index].classList.add('active');
+        //       });
+        //   });
+        //   const anchorTags = secondElementDiv.querySelectorAll('.anchorPath');
+        //   anchorTags.forEach(anchor => {
+        //       anchor.addEventListener('click', () => {
+        //         console.log(anchor.getAttribute('href'));  // Use the href value as needed
+        //           let imagePath = anchor.getAttribute('href');
+        //           displayURLContent(imagePath, thirdElementDiv);
+        //       });
+        //   });
+
+        //   parentContainerDiv.appendChild(thirdElementDiv);
+        //   belowNavMainContainer.appendChild(parentContainerDiv);
+
+
+        // }
         function getChildResponseData(childResponseData) {
           parentContainerDiv.innerHTML = '';
-
-          console.log(childResponseData.depth);
-
+          let depth;
+ 
           const firstElementChildDiv = document.createElement('div');
           firstElementChildDiv.className = 'firstElementChildDiv';
-
+ 
           const secondElementDiv = document.createElement('div');
           secondElementDiv.className = 'secondElementDiv';
-          console.log(secondElementDiv);
-
+ 
           const thirdElementDiv = document.createElement('div');
           thirdElementDiv.className = 'thirdElementDiv';
-
+ 
           const ul = document.createElement('ul');
-
+ 
           console.log(childResponseData);
           if (typeof childResponseData === 'object' && childResponseData !== null) {
               // Iterate over object keys
               for (const key in childResponseData) {
-
+ 
                   if (childResponseData.hasOwnProperty(key)) {
                       const item = childResponseData[key];
                       const li = createListElement(key);
                       ul.appendChild(li);
-
+ 
                       // Check if the item has children and process them
                       if (Array.isArray(item)) {
                           const subUl = document.createElement('ul');
                           subUl.className = 'subList';
                           item.forEach((subItem) => {
-                            console.log(subItem);
                               subUl.appendChild(createListElement(subItem.title, subItem.path));
-                              console.log(subItem.depth);
-
+                              depth = subItem.depth;
+ 
                           });
                           secondElementDiv.appendChild(subUl);
                       }
@@ -478,30 +557,38 @@ export default async function decorate(block) {
           } else {
               console.error("childResponseData is not an array or object.");
           }
-
+          if (depth == '2'){
           firstElementChildDiv.appendChild(ul);
           parentContainerDiv.appendChild(firstElementChildDiv);
-          parentContainerDiv.appendChild(secondElementDiv);
-
-          // By default, show the first sublist
-          const firstSubList = secondElementDiv.querySelector('.subList');
-          if (firstSubList) {
-              firstSubList.classList.add('active');
           }
-
-          // Add event listeners to show/hide the sublists
-          const mainItems = firstElementChildDiv.querySelectorAll('.listElement');
-          const subLists = secondElementDiv.querySelectorAll('.subList');
-          mainItems.forEach((item, index) => {
-              item.addEventListener('click', () => {
-                  subLists.forEach((subList) => subList.classList.remove('active'));
-                  subLists[index].classList.add('active');
-              });
-              item.addEventListener('click', () => {
-                  subLists.forEach((subList) => subList.classList.remove('active'));
-                  subLists[index].classList.add('active');
-              });
-          });
+          parentContainerDiv.appendChild(secondElementDiv);
+ 
+ 
+    // By default, show the first sublist
+    const subLists = secondElementDiv.querySelectorAll('.subList');
+    if (subLists.length > 0) {
+        subLists[0].classList.add('active');
+    }
+ 
+    const mainItems = firstElementChildDiv.querySelectorAll('.listElement');
+    if (mainItems.length > 0) {
+        mainItems[0].classList.add('active');
+    }
+ 
+    // Add event listeners to show/hide the sublists and manage active class
+    mainItems.forEach((item, index) => {
+     item.addEventListener('click', () => {
+        // Remove 'active' class from all main items
+        mainItems.forEach(mainItem => mainItem.classList.remove('active'));
+        // Add 'active' class to the clicked item
+        item.classList.add('active');
+        // Remove 'active' class from all sublists and add it to the corresponding sublist
+        subLists.forEach(subList => subList.classList.remove('active'));
+        if (index < subLists.length) {
+          subLists[index].classList.add('active');
+        }
+      });
+    });
           const anchorTags = secondElementDiv.querySelectorAll('.anchorPath');
           anchorTags.forEach(anchor => {
               anchor.addEventListener('click', () => {
@@ -510,11 +597,11 @@ export default async function decorate(block) {
                   displayURLContent(imagePath, thirdElementDiv);
               });
           });
-
+ 
           parentContainerDiv.appendChild(thirdElementDiv);
           belowNavMainContainer.appendChild(parentContainerDiv);
-
-
+ 
+ 
         }
 
 
@@ -529,7 +616,7 @@ export default async function decorate(block) {
                 return response.json();
             })
             .then((response) => {
-                console.log(response.data);
+                // console.log(response.data);
                 responseData = response.data;
                 getResponseData(responseData);
             })
@@ -539,7 +626,7 @@ export default async function decorate(block) {
         }
 
         function transformResponseData(data) {
-          console.log(data.depth);
+          // console.log(data.depth);
           let depth = data.depth;
           const transformedData = {};
           data.forEach(item => {
@@ -582,13 +669,13 @@ export default async function decorate(block) {
               return response.json();
           })
           .then((response) => {
-              console.log(response.data);
+              // console.log(response.data);
               let childResponseData = response.data;
               childResponseData.depth = depth;
-              console.log(childResponseData.depth);
+              // console.log(childResponseData.depth);
               // Transform the response data
               const transformedData = transformResponseData(childResponseData);
-              console.log(transformedData);
+              // console.log(transformedData);
               getChildResponseData(transformedData);
           })
           .catch((error) => {

@@ -31,7 +31,7 @@ function decodeHashToObject() {
 
 function generateHiddenInput(tabSectionIndex, presentTabContents, block) {
   const hashObj = decodeHashToObject();
-  console.log(hashObj);
+  // console.log(hashObj);
   for (let i = presentTabContents.length - 1; i > -1; i -= 1) {
     const { tabTitle } = presentTabContents[i].dataset;
     const input = document.createElement('input');
@@ -81,7 +81,7 @@ function generateTabNav(tabSectionIndex, presentTabContents) {
 }
 
 export default async function decorate(block) {
-  console.log(block);
+  // console.log(block);
   block.classList.add('moble-view-version');
   const presentTabContents = [...block.querySelectorAll(':scope > div.contents-wrapper > div.contents')];
 

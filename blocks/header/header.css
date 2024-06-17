@@ -184,6 +184,13 @@ header nav .nav-sections .anchorClass{
   padding-right: 20px;
 }
 
+header nav .nav-sections .anchorClass.rotate{
+  text-decoration: none;
+  position: relative; 
+  padding-right: 20px;
+  color:green;
+}
+
 header nav .nav-sections .anchorClass::after{
   position: absolute;
   right: 10px;
@@ -225,7 +232,7 @@ header nav .nav-sections .belowNavMainContainer {
   margin: 0 auto;
   padding: 10px;
   margin-left:-150px;
-  margin-top: 20px;
+  margin-top: 8px;
 }
 
 header nav .nav-sections .belowNavMainContainer .parentContainerdiv {
@@ -235,16 +242,15 @@ header nav .nav-sections .belowNavMainContainer .parentContainerdiv {
 }
 
 header nav .nav-sections .belowNavMainContainer .firstElementChildDiv,
-header nav .nav-sections .belowNavMainContainer .secondElementDiv,
-header nav .nav-sections .belowNavMainContainer .thirdElementDiv {
-  flex: 1; /* Allow these elements to take up available space */
+header nav .nav-sections .belowNavMainContainer .secondElementDiv
+ {
+  flex: 1;
   box-sizing: border-box;
   padding: 10px;
 }
 
 header nav .nav-sections .belowNavMainContainer .firstElementChildDiv {
   border-right: 1px solid #b8b8b8;
-  /* border-bottom: 1px solid #b8b8b8; */
 }
 
 header nav .nav-sections .belowNavMainContainer .secondElementDiv {
@@ -255,7 +261,6 @@ header nav .nav-sections .belowNavMainContainer .secondElementDiv ul {
   margin: 0;
   padding: 0;
   list-style: none;
-  display:block;
 }
 
 header nav .nav-sections .belowNavMainContainer .thirdElementDiv main {
@@ -266,6 +271,19 @@ header nav .nav-sections .belowNavMainContainer .thirdElementDiv {
   display: flex;
   flex-direction: column;
   justify-content: center;
+}
+
+.listElement{
+  padding:10px;
+}
+
+.listElement.active a {
+  color: #3CB8FF;
+}
+
+.secondElementDiv .subList.active,
+.secondElementDiv .subList.active * {
+  color: #3CB8FF;
 }
 
 
@@ -300,6 +318,29 @@ header nav .nav-sections .belowNavMainContainer .thirdElementDiv {
   max-width: 600px;
 }
 
+.columns > div > div:first-child > p:first-child{
+  font-size: 1rem;
+  text-wrap: balance;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.columns > div > div:first-child > p:nth-child(2){
+  font-size: 14px;
+  text-wrap: balance;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.columns > div > div:first-child > p:nth-child(3){
+  font-size: 14px;
+  font-weight: 700;
+  color:rgb(12, 190, 235);
+  text-wrap: balance;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
 .columns > div > div:last-child{
   margin-right: 20px;
   background-color: blue;
@@ -309,6 +350,14 @@ header nav .nav-sections .belowNavMainContainer .thirdElementDiv {
 .columns img {
   max-width: 100%;
   height: auto;
+  display: block;
+}
+
+.secondElementDiv .subList {
+  display: none;
+}
+ 
+.secondElementDiv .subList.active {
   display: block;
 }
 
@@ -430,7 +479,7 @@ header nav .nav-tools {
 }
 
 header nav .nav-tools .default-content-wrapper p{
-  display:grid;
+  /* display:grid; */
   align-items: center;
 }
 

@@ -135,7 +135,8 @@ function displaySlide(carouselWrapper, index) {
     const teasers = carouselWrapper.querySelectorAll('.teaser-container');
     teasers.forEach((teaser, i) => {
         if (i === index) {
-            teaser.style.display = 'block';
+            // teaser.style.display = 'block';
+            teaser.style.display = 'flex';
         } else {
             teaser.style.display = 'none';
         }
@@ -146,13 +147,13 @@ function displaySlide(carouselWrapper, index) {
 
 function parseTimingAttribute(timingAttribute) {
     if (!timingAttribute) {
-        return 5000; // Default interval of 5 seconds
+        return 100000; // Default interval of 100 seconds
     }
 
     const match = timingAttribute.match(/^(\d+)\s*(sec|seconds)?$/i);
     if (!match) {
         console.warn(`Invalid data-timing attribute: ${timingAttribute}. Using default interval.`);
-        return 5000; // Default interval if attribute format is invalid
+        return 100000; // Default interval if attribute format is invalid
     }
 
     const interval = parseInt(match[1], 10) * 1000; // Convert seconds to milliseconds
