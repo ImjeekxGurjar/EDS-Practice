@@ -3,12 +3,16 @@
     margin-bottom: 16px;
     justify-content: center;
 }
+
+.buttons-container{
+  background: #F4F4F4;
+}
  
 .tab {
     padding: 5px 10px;
     cursor: pointer;
     border: none;
-    background: none;
+    background: #fff;
     outline: none;
     font-size: 14px;
     color: #007BFF; 

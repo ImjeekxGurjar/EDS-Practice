@@ -409,9 +409,11 @@ export default async function decorate(block) {
                       event.preventDefault();
                       if (this.classList.contains('rotate')) {
                         this.classList.remove('rotate');
+                        belowNavMainContainer.classList.remove('show');
                       } else {
                         navLinks.forEach(link => link.classList.remove('rotate'));
                         this.classList.add('rotate');
+                        belowNavMainContainer.classList.add('show');
                       }
                     });
                   });
@@ -583,6 +585,7 @@ export default async function decorate(block) {
         // Add 'active' class to the clicked item
         item.classList.add('active');
         // Remove 'active' class from all sublists and add it to the corresponding sublist
+        thirdElementDiv.innerHTML='';
         subLists.forEach(subList => subList.classList.remove('active'));
         if (index < subLists.length) {
           subLists[index].classList.add('active');
