@@ -590,13 +590,23 @@ export default async function decorate(block) {
       });
     });
           const anchorTags = secondElementDiv.querySelectorAll('.anchorPath');
+          // anchorTags.forEach(anchor => {
+          //     anchor.addEventListener('click', () => {
+          //       console.log(anchor.getAttribute('href'));  // Use the href value as needed
+          //         let imagePath = anchor.getAttribute('href');
+          //         displayURLContent(imagePath, thirdElementDiv);
+          //     });
+          // });
           anchorTags.forEach(anchor => {
-              anchor.addEventListener('click', () => {
-                console.log(anchor.getAttribute('href'));  // Use the href value as needed
-                  let imagePath = anchor.getAttribute('href');
-                  displayURLContent(imagePath, thirdElementDiv);
-              });
-          });
+            anchor.addEventListener('click', function () {
+                anchorTags.forEach(anchor => anchor.classList.remove('anchor_active'));
+                // Add 'anchor_active' class to the clicked anchor
+                this.classList.add('anchor_active');  
+                console.log(this.getAttribute('href'));
+                let imagePath = this.getAttribute('href');
+                displayURLContent(imagePath, thirdElementDiv);
+            });
+        });
  
           parentContainerDiv.appendChild(thirdElementDiv);
           belowNavMainContainer.appendChild(parentContainerDiv);

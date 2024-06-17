@@ -281,9 +281,13 @@ header nav .nav-sections .belowNavMainContainer .thirdElementDiv {
   color: #3CB8FF;
 }
 
-.secondElementDiv .subList.active,
+/* .secondElementDiv .subList.active,
 .secondElementDiv .subList.active * {
   color: #3CB8FF;
+} */
+.subList.active .anchorPath.anchor_active{
+  color: #3CB8FF;
+  text-decoration: none;
 }
 
 
